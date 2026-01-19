@@ -71,30 +71,41 @@
         EJS_pathtodata = "https://cdn.jsdelivr.net/gh/genizy/emu@master/";
         EJS_startOnLoaded = true;
 
+        /* ===== WASM heap memory (NOT console RAM) ===== */
+        EJS_totalMemory = 512; // MB
+
         /* ===== Video fix (no flashing) ===== */
         EJS_disableWebGL = true;
 
         /* ===== Stability fixes ===== */
-        EJS_threads = false;       // prevent desync freezes
-        EJS_forceExtract = true;   // prevent GC pauses
+        EJS_threads = false;
+        EJS_forceExtract = true;
 
         document.addEventListener("visibilitychange", () => {
           if (document.visibilityState === "visible") {
-            try { if (typeof EJS_audioContext !== "undefined") EJS_audioContext.resume(); } catch (e) {}
+            try {
+              if (typeof EJS_audioContext !== "undefined") {
+                EJS_audioContext.resume();
+              }
+            } catch (e) {}
           }
         });
 
         document.addEventListener("blur", () => {
-          try { if (typeof EJS_audioContext !== "undefined") EJS_audioContext.resume(); } catch (e) {}
+          try {
+            if (typeof EJS_audioContext !== "undefined") {
+              EJS_audioContext.resume();
+            }
+          } catch (e) {}
         });
 
         /* ===== Optional long-run fixes ===== */
-        EJS_pollRate = 60;         // stabilize emulation loop
-        EJS_fps = 60;              // fixed 60fps timing
-        EJS_backgroundMode = "active"; // prevent Chrome throttling
+        EJS_pollRate = 60;
+        EJS_fps = 60;
+        EJS_backgroundMode = "active";
         EJS_pauseOnBlur = false;
         EJS_pauseOnFocusLost = false;
-        EJS_dynamicSpeed = false;  // avoid CPU clock drift
+        EJS_dynamicSpeed = false;
 
         /* Load EmulatorJS */
         const script = document.createElement("script");
