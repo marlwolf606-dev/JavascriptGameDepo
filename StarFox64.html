@@ -71,8 +71,9 @@
         EJS_pathtodata = "https://cdn.jsdelivr.net/gh/genizy/emu@master/";
         EJS_startOnLoaded = true;
 
-        /* ===== WASM heap memory (NOT console RAM) ===== */
-       EJS_totalMemory = 128; // MB
+        /* ===== Browser-safe WASM heap memory ===== */
+        const isChrome = /Chrome/.test(navigator.userAgent) && !/Edg|OPR/.test(navigator.userAgent);
+        EJS_totalMemory = isChrome ? 128 : 256; // MB
 
         /* ===== Video fix (no flashing) ===== */
         EJS_disableWebGL = true;
