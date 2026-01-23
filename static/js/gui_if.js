@@ -50,7 +50,7 @@ function internal_GetCardImageUrl(card) {
   var rank = parseInt(card.substring(1));
   rank = internal_FixTheRanking(rank);
   suit = internal_FixTheSuiting(suit);
-
+  console.log("url('" + IMAGE_CDN_BASE + rank + "_of_" + suit + ".png')")
   return "url('" + IMAGE_CDN_BASE + rank + "_of_" + suit + ".png')";
 }
 
@@ -256,3 +256,4 @@ function gui_disable_shortcut_keys(func) {
 
 // Theme / mode functions unchanged...
 // (rest of gui theme functions remain exactly as before)
+
