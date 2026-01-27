@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
+<!-- Ultimate Game Stash file -->
+
 <head>
     <meta charset="UTF-8">
-    <title>Sonic 3 (Europe)</title>
 
     <script src="//www.google.com/jsapi"></script>
     <script>
@@ -14,17 +16,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            overflow: hidden;
-            background: #000;
+        html, body {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            color: #000;
             font-family: 'Press Start 2P', cursive;
         }
 
         #game {
+            position: fixed;
+            inset: 0;
             width: 100vw;
             height: 100vh;
+            background: black;
             display: none;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+            image-rendering: pixelated;
         }
 
         #startButton {
@@ -33,7 +48,6 @@
             height: 40px;
             background-color: #4CAF50;
             color: white;
-            text-align: center;
             font-size: 16px;
             margin: 20px auto;
             border: none;
@@ -41,12 +55,18 @@
             cursor: pointer;
             box-shadow: 0px 0px 10px 2px #000000;
         }
+
+        #button {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-    <div id="game"></div>
-    <button id="startButton">PLAY</button>
+    <div style="width: 100vw; height: 100vh; max-width:100%">
+        <div id="game"></div>
+        <button id="startButton">PLAY</button>
+    </div>
 
     <script>
         function startGame() {
@@ -58,17 +78,19 @@
             EJS_color = "#000000";
             EJS_startOnLoaded = true;
 
+            EJS_disableWebGL = true;
+
             EJS_pathtodata =
                 "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data";
 
-            // Sonic 3 (Europe)
             EJS_gameUrl =
                 "https://cdn.jsdelivr.net/gh/marlwolf606-dev/JavascriptGameDepo@main/Sonic%203%20(Europe).md";
 
             loadGame();
         }
 
-        document.getElementById("startButton").addEventListener("click", startGame);
+        document.getElementById("startButton")
+            .addEventListener("click", startGame);
 
         function loadGame() {
             var script = document.createElement("script");
